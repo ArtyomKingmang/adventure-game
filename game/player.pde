@@ -1,3 +1,4 @@
+PImage player;
 
 void keyPressed(){
    if(key == 'w')key_w = true;
@@ -20,5 +21,5 @@ void movement(){
    if(key_d) PlayerX += SpeedX;
    
    fill(0);
-   rect(PlayerX,PlayerY,PlayerWidth,PlayerHeight);
+   image(player, PlayerX,PlayerY,PlayerWidth + 10,PlayerHeight + 20);
 }
