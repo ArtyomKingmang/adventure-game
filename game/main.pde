@@ -6,6 +6,7 @@ final int HEIGHT = 560;
 id 0 : grass
 id 1 : water 
 id 2 : sand
+id 3 : land
 other id : emptyColor
 */
 
@@ -43,13 +44,14 @@ int PlayerHeight = BlockHeight;
 color grass = color(100, 200, 100);
 color water = color(100, 100, 200);
 color sand = color(252, 188, 114);
+color land = color(137, 93, 66);
 int emptyColor = 255;
 void settings(){
    size(WIDTH, HEIGHT);   
 }
 void setup(){
   player = loadImage("player.png");
-   noStroke(); 
+  noStroke(); 
 }
 void draw(){
   background(255);
@@ -67,8 +69,13 @@ void drawMap(){
           fill(grass); 
        }else if(map[i][j] == 2){
           fill(sand);    
+       }else if(map[i][j] == 3){
+         fill(land);  
        }else{
           fill(emptyColor); 
+       }
+       if(mouseX >= j * BlockWidth && mouseX <= (j + 1) * BlockWidth && mouseY >= i * BlockHeight && mouseY <= (i + 1) * BlockHeight){
+          fill(255);
        }
        rect(j * PlayerWidth, i * BlockHeight, PlayerWidth, BlockHeight);
      }
@@ -81,6 +88,8 @@ void mousePressed(){
     int jIndex = mouseX / BlockWidth ;
     int iIndex = mouseY / BlockHeight;
     if(map[iIndex][jIndex] != 4){
-        map[iIndex][jIndex] = items[selected];
+        if(items[selected] == 1){
+          map[iIndex][jIndex] = 3;
+        }
     }
 }
