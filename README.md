@@ -1,2 +1,2 @@
-# survival-game
+# adventure-game
 game for tutorial
