@@ -1,25 +1,22 @@
 class Block{
-  color grassColor = color(100, 200, 100);
-  color waterColor = color(#4240D3);
-  color sandColor = color(252, 188, 114);
-  color land = color(137, 93, 66);
-  
-  void fillSand(){
-     fill(sandColor); 
-     
-  }
-  void fillLand(){
-    fill(land);  
-  }
-  void fillGrass(){
-     fill(grassColor); 
-  }
-   
-  void fillWater(){
-     fill(waterColor); 
-  }
-  void drawBlock(int j, int i){
-    rect(j * PlayerWidth, i * BlockHeight, PlayerWidth, BlockHeight); 
-  }
+ int size = 50;
+ 
+ // id : 3
+ void water(){
+   stroke(#61A3FC);
+   fill(#61A3FC);
+ }
+ 
+ // id : 1
+ void grass(){
+   stroke(#61FC7E);
+   fill(#61FC7E);
+ }
+ 
+ // id : 2
+ void sand(){
+   stroke(#FCDB61);
+   fill(#FCDB61);
+ }
   
 }

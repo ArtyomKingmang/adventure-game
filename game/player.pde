@@ -1,48 +1,57 @@
-
-   void keyPressed(){
-     if(key == 'w')key_w = true;
-     if(key == 'a')key_a = true;
-     if(key == 's')key_s = true;
-     if(key == 'd')key_d = true;
+class Player{
+  int x, y;
+  
+  float speed = 6.0;
+  int WIDTH = block.size;
+  int HEIGHT = block.size + 20;
+  PImage emptyPlayer;
+  PImage player1;
+  PImage player2;
+  int imgChecker;
+  void init(){
+    x = mapClass.map[30][90];
+    y = mapClass.map[90][30];
+    emptyPlayer = loadImage("trans.png");
+    player1 = loadImage("player1.png");
+    player2 = loadImage("player2.png");
   }
   
-   void keyReleased(){
-     if(key == 'w')key_w = false;
-     if(key == 'a')key_a = false;
-     if(key == 's')key_s = false;
-     if(key == 'd')key_d = false;
+  void update() {
+    if(imgChecker == 0) emptyPlayer = player1;
+    if(imgChecker == 1) emptyPlayer = player2;
+    fill(255, 0, 0);
+    image(emptyPlayer, x - camera.x, y - camera.y, WIDTH, HEIGHT);
   }
   
-  void movement(){
-    int playerCellX = PlayerX / BlockWidth;
-    int playerCellY = PlayerY / BlockHeight;
-    try{
-      if (map[playerCellY][playerCellX] == 1) {
-        tint(100,100,200);
-        // Если игрок касается блока с id 1 (вода), замедляем его скорость
-        SpeedPlayerX = 3; // Например, уменьшаем скорость по горизонтали
-        SpeedPlayerY = 3; // И скорость по вертикали
-      } else {
-        tint(255,255);
-        // Возвращаем обычную скорость, если игрок не касается блока воды
-        SpeedPlayerX = 10;
-        SpeedPlayerY = 10;
-      }
-    }catch(ArrayIndexOutOfBoundsException e){
-       println("ArrayIndexOutOfBoundsException");
-    }
-     if(key_w) PlayerY -= SpeedPlayerY;
-     if(key_s) PlayerY += SpeedPlayerY;
+  public int getX(){
+     return x; 
+  }
+  
+  public int getY(){
+     return y; 
+  }
+  
+  void move(){
+     if(key_w) movePlayer(0, -speed);
+     if(key_s) movePlayer(0, speed);
      if(key_a) {
-       playerImage = playerFrame2;
-       PlayerX -= SpeedPlayerX;
+       movePlayer(-speed, 0);
+       imgChecker = 1;     
      }
-     if(key_d) {
-       playerImage = playerFrame1; 
-       PlayerX += SpeedPlayerX;
-     }
-     fill(0);
-     image(playerImage, PlayerX,PlayerY,PlayerWidth + 10,PlayerHeight + 20);
-     noTint();
+     if(key_d){
+       movePlayer(speed, 0);
+       imgChecker = 0;
+   }
   }
   
+  void movePlayer(float dx, float dy) {
+    int newX = x + int(dx);
+    int newY = y + int(dy);
+    
+    if (newX >= 0 && newX < mapClass.mapWidth * block.size && newY >= 0 && newY < mapClass.mapHeight * block.size) {
+      x = newX;
+      y = newY;
+    }
+  }
+  
+}
