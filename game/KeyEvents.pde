@@ -11,4 +11,10 @@ void keyPressed() {
   if(key == 's') key_s = true;
   if(key == 'a') key_a = true;
   if(key == 'd') key_d = true;
+  
+  if (keyCode == RIGHT) {
+    inventory.selectItem((inventory.selected + 1) % inventory.items.length); // Переход к следующему элементу
+  } else if (keyCode == LEFT) {
+    inventory.selectItem((inventory.selected - 1 + inventory.items.length) % inventory.items.length); // Переход к предыдущему элементу
+  }
 }

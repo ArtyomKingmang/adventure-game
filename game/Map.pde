@@ -38,7 +38,7 @@ class Map{
         }
         
         rect(x * block.size - camera.x, y * block.size - camera.y, block.size, block.size);
-        
+     
         if (x == highlightedX && y == highlightedY) {
           fill(255, 255, 255, 100); // Полупрозрачный белый цвет
           rect(x * block.size - camera.x, y * block.size - camera.y, block.size, block.size);

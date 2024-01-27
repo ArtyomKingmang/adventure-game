@@ -1,59 +1,41 @@
-class Inventar{
-  PImage hoe;
-  PImage bucket;
-  int[] items = {0, 1, 2};
-  int selected = 0;
-  int checker;
-  int itemX;
-  int itemY;
-  int itemSize = 30;
+class Item {
+  PImage image;
+  int type;
 
-  void init(){
-   
-    bucket = loadImage("bucket.png");
-    hoe = loadImage("hoe.png"); 
+  Item(PImage img, int t) {
+    image = img;
+    type = t;
   }
-  
-  void draw(){
-    itemX = mouseX-25;
-    itemY = mouseY-25;
-    invent();
+}
+
+class Inventory {
+  Item[] items;
+  int selected = 0;
+
+  Inventory() {
+    items = new Item[2]; // Создаем массив из трех элементов
+    items[0] = new Item(loadImage("bucket.png"), 0); // Инициализируем каждый элемент инвентаря
+    items[1] = new Item(loadImage("hoe.png"), 1);
   }
-  
-  
-  void invent(){
-     if(keyPressed){
-         if(key == '0'){
-           selected = items[0];
-           checker = 0;
-         }if(key == '1'){
-           selected = items[1];
-           checker = 1;
-           //
-         }
-         if(key == '2'){
-           selected = items[2];
-           checker = 2;
-         }
-         if(key == '3'){
-           selected = items[3];
-           checker = 3;
-         }
-         if(key == '4'){
-           selected = items[4];
-           checker = 4;
-         }
-     }
-     
-       if(checker == 1){
-        image(bucket,itemX,itemY,itemSize,itemSize); 
+
+  void draw(float x, float y) {
+    float itemX = x;
+    float itemY = y;
+    for (int i = 0; i < items.length; i++) {
+      if (i == selected) {
+        fill(255);
+        rect(itemX - 5, itemY - 5, 40, 40);
       }
-      
-       if(checker == 2){
-        image(hoe,itemX,itemY,itemSize,itemSize); 
-      }
-      
+      image(items[i].image, itemX, itemY, 30, 30);
+      itemX += 40; 
+    }
+    
     
   }
-  
+
+  void selectItem(int index) {
+    if (index >= 0 && index < items.length) {
+      selected = index;
+    }
+  }
 }

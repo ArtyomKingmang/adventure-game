@@ -8,10 +8,11 @@ class Block{
  }
  
  // id : 1
- void grass(){
-   stroke(#61FC7E);
-   fill(#61FC7E);
- }
+  void grass(){
+    stroke(#61FC7E);
+    fill(#61FC7E);
+    
+  }
  
  // id : 2
  void sand(){
