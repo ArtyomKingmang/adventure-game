@@ -9,8 +9,6 @@ class Player{
   boolean FlipChecker;
   void init(){
     emptyPlayer = loadImage("player1.png");
-    
-    //player2 = loadImage("player2.png");
   }
   
   void update() {
@@ -44,18 +42,19 @@ class Player{
       int newX = x + int(dx);
       int newY = y + int(dy);
       
-      // Проверяем, не находится ли персонаж на блоке воды
+      /*
+      Проверяем, не находится ли персонаж на блоке воды. 
+      Если условие выполняется, то уменьшаем скорость
+      */
       int mapX = int(newX / block.size);
       int mapY = int(newY / block.size);
       if (mapX >= 0 && mapX < mapClass.mapWidth && mapY >= 0 && mapY < mapClass.mapHeight) {
-        if (mapClass.map[mapX][mapY] == 3) { // Если блок - вода
-          tint(100,100,200);
+        if (mapClass.map[mapX][mapY] == 3) { 
           cutIndex = 2;
-          speed = 3.0; // Устанавливаем меньшую скорость
+          speed = 3.0; 
         } else {
-          tint(255);
           cutIndex = 1;
-          speed = 6.0; // Возвращаем обычную скорость
+          speed = 6.0;
         }
       }
       

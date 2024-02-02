@@ -1,23 +1,22 @@
 class Block{
- int size = 50;
- 
- // id : 3
- void water(){
-   stroke(#61A3FC);
-   fill(#61A3FC);
- }
- 
- // id : 1
-  void grass(){
-    stroke(#61FC7E);
-    fill(#61FC7E);
-    
+  int size = 50;
+  PImage grassTexture;
+  PImage waterTexture;
+  PImage sandTexture;
+  
+  void initTextures(){
+    grassTexture = loadImage("grass.png");
+    sandTexture = loadImage("sand.png");
+    waterTexture = loadImage("water.png");
   }
  
- // id : 2
- void sand(){
-   stroke(#FCDB61);
-   fill(#FCDB61);
- }
-  
+  void drawBlock(int blockId, int x, int y){
+    if (blockId == 1) {
+      image(grassTexture, x * size - camera.x, y * size - camera.y, size, size);
+    } else if (blockId == 2) {
+      image(sandTexture, x * size - camera.x, y * size - camera.y, size, size);
+    } else if (blockId == 3) {
+      image(waterTexture, x * size - camera.x, y * size - camera.y, size, size);
+    }
+  }
 }

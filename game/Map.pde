@@ -16,36 +16,33 @@ class Map{
       for (int y = 0; y < mapHeight; y++) {
         float n = noise(x * 0.1, y * 0.1);
         if (n < 0.4) {
-          map[x][y] = 1; // зеленый блок
+          map[x][y] = 1; // green block
         } else if (n < 0.7) {
-          map[x][y] = 2; // желтый блок
+          map[x][y] = 2; // yellow block
         } else {
-          map[x][y] = 3; // синий блок
+          map[x][y] = 3; // blue block
         }
       }
     }
   }
   
-  void draw() {
-    for (int x = 0; x < mapWidth; x++) {
-      for (int y = 0; y < mapHeight; y++) {
-        if (map[x][y] == 1) {
-          block.grass();
-        } else if (map[x][y] == 2) {
-          block.sand();
-        } else if (map[x][y] == 3) {
-          block.water();
-        }
-        
+void draw() {
+  float startX = max(0, camera.x / block.size);
+  float endX = min(mapWidth, (camera.x + width) / block.size + 1);
+  float startY = max(0, camera.y / block.size);
+  float endY = min(mapHeight, (camera.y + height) / block.size + 1);
+
+  for (int x = int(startX); x < endX; x++) {
+    for (int y = int(startY); y < endY; y++) {
+      block.drawBlock(map[x][y], x, y);
+      
+      if (x == highlightedX && y == highlightedY) {
+        fill(255, 255, 255, 100); // Полупрозрачный белый цвет
         rect(x * block.size - camera.x, y * block.size - camera.y, block.size, block.size);
-     
-        if (x == highlightedX && y == highlightedY) {
-          fill(255, 255, 255, 100); // Полупрозрачный белый цвет
-          rect(x * block.size - camera.x, y * block.size - camera.y, block.size, block.size);
-        }
       }
     }
   }
+}
 
   void updateHighlightedBlock() {
     int xIndex = int((mouseX + camera.x) / block.size);

@@ -13,8 +13,8 @@ void keyPressed() {
   if(key == 'd') key_d = true;
   
   if (keyCode == RIGHT) {
-    inventory.selectItem((inventory.selected + 1) % inventory.items.length); // Переход к следующему элементу
+    inventory.selectItem((inventory.selected + 1) % inventory.items.length);
   } else if (keyCode == LEFT) {
-    inventory.selectItem((inventory.selected - 1 + inventory.items.length) % inventory.items.length); // Переход к предыдущему элементу
+    inventory.selectItem((inventory.selected - 1 + inventory.items.length) % inventory.items.length);
   }
 }

@@ -13,8 +13,8 @@ class Inventory {
   int selected = 0;
 
   Inventory() {
-    items = new Item[2]; // Создаем массив из трех элементов
-    items[0] = new Item(loadImage("bucket.png"), 0); // Инициализируем каждый элемент инвентаря
+    items = new Item[2];
+    items[0] = new Item(loadImage("bucket.png"), 0);
     items[1] = new Item(loadImage("hoe.png"), 1);
   }
 
